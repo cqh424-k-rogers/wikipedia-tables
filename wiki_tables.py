@@ -14,7 +14,7 @@ def get_tables(html_file=None):
     else:
         headers = {"User-Agent": "wiki-table-assignment/1.0 (student project)"}
         html = requests.get(URL, headers=headers, timeout=30).text
-    return pd.read_html(StringIO(html)
+    return pd.read_html(StringIO(html))
 
 
 

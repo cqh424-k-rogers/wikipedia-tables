@@ -6,7 +6,7 @@ import requests
 
 URL="https://en.wikipedia.org/wiki/List_of_countries_by_life_expectancy"
 
-def get_tables(html_file=None)
+def get_tables(html_file=None):
   if html_file:
     html=open(html_file,encoding="utf-8").read()
   else:
@@ -28,8 +28,8 @@ def to_number(column):
 
 def clean_table(df,prefix):
   if isinstance(df.columns,pd.MultiIndex):
-    df.columns=["".join(dict.fromkeys(map(str,c)))for c in df.columns]
-  df.columns=re.sub(r"\W+","_",remove_footnotes(c)).strip("_").lower()
+    df.columns=[" ".join(dict.fromkeys(map(str,c)))for c in df.columns]
+  df.columns=[re.sub(r"\W+","_",remove_footnotes(c)).strip("_").lower()
       for c in df.columns]
 
 text_cols=[c for c in df.columns if not pd.api.types.is_numeric_dtype(df[c])]
@@ -44,8 +44,8 @@ for col in list(df.columns):
   if col =="country":
     continue
   numbers=to_number(df[col])
-  if numbers.notna().mean()>0.6
-    df[col]=numbes
+  if numbers.notna().mean()>0.6:
+    df[col]=numbers
   else:
     df=df.drop(columns=col)
 
